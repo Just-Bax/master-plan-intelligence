@@ -226,8 +226,7 @@ export function MapDataLayer() {
             properties: {},
           } as GeoJSON.Feature,
           {
-            pointToLayer: (_feature, latlng) =>
-              L.marker(latlng, { icon }),
+            pointToLayer: (_feature, latlng) => L.marker(latlng, { icon }),
           }
         );
         if (layer.getLayers().length > 0) {

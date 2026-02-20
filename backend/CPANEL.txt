@@ -1,0 +1,26 @@
+cPanel "Create Application" (СОЗДАТЬ ПРИЛОЖЕНИЕ)
+================================================
+
+Form fields:
+  Версия Python (Python version): 3.11.x
+  Корневой каталог приложения (Application root): master-plan-intelligence/backend
+  URL приложения (Application URL): your domain (e.g. api.itpanda.uz or itpanda.uz)
+  Файл запуска приложения (Application startup file): passenger_wsgi.py
+  Точка входа в приложение (Application entry point): application
+  Файл логов Passenger: e.g. /home/itpandau/logs/passenger.log
+
+Environment variables (ДОБАВИТЬ ПЕРЕМЕННУЮ):
+  Add each as name = value. Required:
+    DATABASE_URL
+    SECRET_KEY
+  Recommended:
+    AI_BASE_URL
+    AI_API_KEY
+    AI_MODEL
+    CORS_ORIGINS   (comma-separated, e.g. https://mp.itpanda.uz,https://itpanda.uz)
+
+After creating the app:
+  1. Upload backend code to the application root.
+  2. In that folder, create/activate venv and run: pip install -r requirements.txt
+  3. Run migrations if needed: alembic upgrade head
+  4. Restart the application in cPanel.

@@ -57,7 +57,9 @@ export function AppLayout() {
   });
 
   const selectedObject =
-    selectedId != null ? objects.find((o) => o.id === selectedId) ?? null : null;
+    selectedId != null
+      ? (objects.find((o) => o.id === selectedId) ?? null)
+      : null;
 
   const mapDataContextValue = {
     masterPlans,

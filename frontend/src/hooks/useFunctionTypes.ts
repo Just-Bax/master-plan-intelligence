@@ -15,7 +15,10 @@ export function useFunctionTypes() {
     queryFn: () => apiGet<FunctionType[]>(API_PATHS.FUNCTION_TYPE),
   });
 
-  const error = queryErrorToMessage(queryError, "Failed to load function types");
+  const error = queryErrorToMessage(
+    queryError,
+    "Failed to load function types"
+  );
 
   return {
     functionTypes,

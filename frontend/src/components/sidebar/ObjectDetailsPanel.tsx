@@ -16,7 +16,10 @@ function formatNum(value: number | null | undefined): string {
   return value.toLocaleString(undefined, { maximumFractionDigits: 0 });
 }
 
-function formatBool(value: boolean | null | undefined, t: (k: string) => string): string {
+function formatBool(
+  value: boolean | null | undefined,
+  t: (k: string) => string
+): string {
   if (value == null) return EMPTY;
   return value ? t("objectDetails.yes") : t("objectDetails.no");
 }
@@ -37,8 +40,12 @@ function getObjectTypeLabel(
   objectTypes: ObjectType[],
   t: (key: string, opts?: { defaultValue?: string }) => string
 ): string {
-  const code = object.object_type_code ?? objectTypes.find((ot) => ot.id === object.object_type_id)?.code;
-  const apiName = objectTypes.find((ot) => ot.id === object.object_type_id)?.name ?? object.object_type_code;
+  const code =
+    object.object_type_code ??
+    objectTypes.find((ot) => ot.id === object.object_type_id)?.code;
+  const apiName =
+    objectTypes.find((ot) => ot.id === object.object_type_id)?.name ??
+    object.object_type_code;
   if (!code) return apiName ?? EMPTY;
   return t(`objectType.${code}`, { defaultValue: apiName ?? code });
 }
@@ -49,9 +56,16 @@ function getFunctionTypeLabel(
   functionTypes: FunctionType[],
   t: (key: string, opts?: { defaultValue?: string }) => string
 ): string | null {
-  const code = object.function_type_code ?? functionTypes.find((ft) => ft.id === object.function_type_id)?.code;
-  const apiName = functionTypes.find((ft) => ft.id === object.function_type_id)?.name ?? object.function_type_code;
-  if (!code) return object.function_type_id != null ? (apiName ?? String(object.function_type_id)) : null;
+  const code =
+    object.function_type_code ??
+    functionTypes.find((ft) => ft.id === object.function_type_id)?.code;
+  const apiName =
+    functionTypes.find((ft) => ft.id === object.function_type_id)?.name ??
+    object.function_type_code;
+  if (!code)
+    return object.function_type_id != null
+      ? (apiName ?? String(object.function_type_id))
+      : null;
   return t(`functionType.${code}`, { defaultValue: apiName ?? code });
 }
 
@@ -64,7 +78,7 @@ interface DetailRowProps {
 
 function DetailRow({ label, value, className, empty }: DetailRowProps) {
   const display = value != null && String(value).trim() !== "" ? value : EMPTY;
-  const isEmpty = empty ?? (display === EMPTY);
+  const isEmpty = empty ?? display === EMPTY;
   return (
     <div
       className={cn(
@@ -73,7 +87,9 @@ function DetailRow({ label, value, className, empty }: DetailRowProps) {
         className
       )}
     >
-      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{label}</span>
+      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+        {label}
+      </span>
       <span className="text-sm font-medium text-foreground">{display}</span>
     </div>
   );
@@ -127,7 +143,9 @@ export function ObjectDetailsPanel({
             <XMarkIcon className="size-5" />
           </button>
         </div>
-        <h2 className="mt-3 text-xl font-bold tracking-tight text-foreground">{name}</h2>
+        <h2 className="mt-3 text-xl font-bold tracking-tight text-foreground">
+          {name}
+        </h2>
         <div className="mt-2 flex items-start gap-2 text-sm text-muted-foreground">
           <MapPinIcon className="mt-0.5 size-4 shrink-0" aria-hidden />
           <span className="line-clamp-2">{location}</span>
@@ -140,10 +158,17 @@ export function ObjectDetailsPanel({
             {t("objectDetails.mainIndicators")}
           </h3>
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
-            <DetailRow label={t("objectDetails.area")} value={area > 0 ? `${formatNum(area)} m²` : EMPTY} />
+            <DetailRow
+              label={t("objectDetails.area")}
+              value={area > 0 ? `${formatNum(area)} m²` : EMPTY}
+            />
             <DetailRow
               label={t("objectDetails.environmentalRiskScore")}
-              value={object.environmental_risk_score != null ? formatNum(object.environmental_risk_score) : EMPTY}
+              value={
+                object.environmental_risk_score != null
+                  ? formatNum(object.environmental_risk_score)
+                  : EMPTY
+              }
             />
             <DetailRow
               label={t("objectDetails.power")}
@@ -166,10 +191,22 @@ export function ObjectDetailsPanel({
           </h3>
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
             <DetailRow label={t("objectDetails.name")} value={object.name} />
-            <DetailRow label={t("objectDetails.objectId")} value={object.object_id} />
-            <DetailRow label={t("objectDetails.parcelId")} value={object.parcel_id} />
-            <DetailRow label={t("objectDetails.objectType")} value={objectTypeLabel !== EMPTY ? objectTypeLabel : EMPTY} />
-            <DetailRow label={t("objectDetails.functionType")} value={functionTypeLabel} />
+            <DetailRow
+              label={t("objectDetails.objectId")}
+              value={object.object_id}
+            />
+            <DetailRow
+              label={t("objectDetails.parcelId")}
+              value={object.parcel_id}
+            />
+            <DetailRow
+              label={t("objectDetails.objectType")}
+              value={objectTypeLabel !== EMPTY ? objectTypeLabel : EMPTY}
+            />
+            <DetailRow
+              label={t("objectDetails.functionType")}
+              value={functionTypeLabel}
+            />
           </div>
         </section>
 
@@ -178,10 +215,23 @@ export function ObjectDetailsPanel({
             {t("objectDetails.location")}
           </h3>
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
-            <DetailRow label={t("objectDetails.administrativeRegion")} value={object.administrative_region} />
-            <DetailRow label={t("objectDetails.district")} value={object.district} />
-            <DetailRow label={t("objectDetails.mahalla")} value={object.mahalla} />
-            <DetailRow label={t("objectDetails.addressFull")} value={object.address_full} className="col-span-2" />
+            <DetailRow
+              label={t("objectDetails.administrativeRegion")}
+              value={object.administrative_region}
+            />
+            <DetailRow
+              label={t("objectDetails.district")}
+              value={object.district}
+            />
+            <DetailRow
+              label={t("objectDetails.mahalla")}
+              value={object.mahalla}
+            />
+            <DetailRow
+              label={t("objectDetails.addressFull")}
+              value={object.address_full}
+              className="col-span-2"
+            />
           </div>
         </section>
 
@@ -190,10 +240,22 @@ export function ObjectDetailsPanel({
             {t("objectDetails.capacity")}
           </h3>
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
-            <DetailRow label={t("objectDetails.capacityPeopleMax")} value={formatNum(object.capacity_people_max)} />
-            <DetailRow label={t("objectDetails.studentCapacity")} value={formatNum(object.student_capacity)} />
-            <DetailRow label={t("objectDetails.bedCount")} value={formatNum(object.bed_count)} />
-            <DetailRow label={t("objectDetails.unitCount")} value={formatNum(object.unit_count)} />
+            <DetailRow
+              label={t("objectDetails.capacityPeopleMax")}
+              value={formatNum(object.capacity_people_max)}
+            />
+            <DetailRow
+              label={t("objectDetails.studentCapacity")}
+              value={formatNum(object.student_capacity)}
+            />
+            <DetailRow
+              label={t("objectDetails.bedCount")}
+              value={formatNum(object.bed_count)}
+            />
+            <DetailRow
+              label={t("objectDetails.unitCount")}
+              value={formatNum(object.unit_count)}
+            />
           </div>
         </section>
 
@@ -204,13 +266,24 @@ export function ObjectDetailsPanel({
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
             <DetailRow
               label={t("objectDetails.distancePublicTransport")}
-              value={object.distance_public_transport_m != null ? `${formatNum(object.distance_public_transport_m)} m` : EMPTY}
+              value={
+                object.distance_public_transport_m != null
+                  ? `${formatNum(object.distance_public_transport_m)} m`
+                  : EMPTY
+              }
             />
             <DetailRow
               label={t("objectDetails.distancePrimaryRoad")}
-              value={object.distance_primary_road_m != null ? `${formatNum(object.distance_primary_road_m)} m` : EMPTY}
+              value={
+                object.distance_primary_road_m != null
+                  ? `${formatNum(object.distance_primary_road_m)} m`
+                  : EMPTY
+              }
             />
-            <DetailRow label={t("objectDetails.parkingSpaces")} value={formatNum(object.parking_spaces_total)} />
+            <DetailRow
+              label={t("objectDetails.parkingSpaces")}
+              value={formatNum(object.parking_spaces_total)}
+            />
           </div>
         </section>
 
@@ -219,12 +292,25 @@ export function ObjectDetailsPanel({
             {t("objectDetails.zonesRisk")}
           </h3>
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
-            <DetailRow label={t("objectDetails.protectedZone")} value={formatBool(object.protected_zone, t)} />
-            <DetailRow label={t("objectDetails.heritageZone")} value={formatBool(object.heritage_zone, t)} />
-            <DetailRow label={t("objectDetails.floodZone")} value={formatBool(object.flood_zone, t)} />
+            <DetailRow
+              label={t("objectDetails.protectedZone")}
+              value={formatBool(object.protected_zone, t)}
+            />
+            <DetailRow
+              label={t("objectDetails.heritageZone")}
+              value={formatBool(object.heritage_zone, t)}
+            />
+            <DetailRow
+              label={t("objectDetails.floodZone")}
+              value={formatBool(object.flood_zone, t)}
+            />
             <DetailRow
               label={t("objectDetails.environmentalRiskScore")}
-              value={object.environmental_risk_score != null ? formatNum(object.environmental_risk_score) : EMPTY}
+              value={
+                object.environmental_risk_score != null
+                  ? formatNum(object.environmental_risk_score)
+                  : EMPTY
+              }
             />
           </div>
         </section>
@@ -234,13 +320,26 @@ export function ObjectDetailsPanel({
             {t("objectDetails.utilities")}
           </h3>
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
-            <DetailRow label={t("objectDetails.power")} value={formatBool(object.power_connected, t)} />
+            <DetailRow
+              label={t("objectDetails.power")}
+              value={formatBool(object.power_connected, t)}
+            />
             <DetailRow
               label={t("objectDetails.availablePowerCapacityKw")}
-              value={object.available_power_capacity_kw != null ? `${formatNum(object.available_power_capacity_kw)} kW` : EMPTY}
+              value={
+                object.available_power_capacity_kw != null
+                  ? `${formatNum(object.available_power_capacity_kw)} kW`
+                  : EMPTY
+              }
             />
-            <DetailRow label={t("objectDetails.water")} value={formatBool(object.water_connected, t)} />
-            <DetailRow label={t("objectDetails.sewer")} value={formatBool(object.sewer_connected, t)} />
+            <DetailRow
+              label={t("objectDetails.water")}
+              value={formatBool(object.water_connected, t)}
+            />
+            <DetailRow
+              label={t("objectDetails.sewer")}
+              value={formatBool(object.sewer_connected, t)}
+            />
           </div>
         </section>
 
@@ -249,9 +348,19 @@ export function ObjectDetailsPanel({
             {t("objectDetails.meta")}
           </h3>
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
-            <DetailRow label={t("objectDetails.dataSourceReference")} value={object.data_source_reference} className="col-span-2" />
-            <DetailRow label={t("objectDetails.createdAt")} value={formatDate(object.created_at)} />
-            <DetailRow label={t("objectDetails.updatedAt")} value={formatDate(object.updated_at)} />
+            <DetailRow
+              label={t("objectDetails.dataSourceReference")}
+              value={object.data_source_reference}
+              className="col-span-2"
+            />
+            <DetailRow
+              label={t("objectDetails.createdAt")}
+              value={formatDate(object.created_at)}
+            />
+            <DetailRow
+              label={t("objectDetails.updatedAt")}
+              value={formatDate(object.updated_at)}
+            />
           </div>
         </section>
       </div>
