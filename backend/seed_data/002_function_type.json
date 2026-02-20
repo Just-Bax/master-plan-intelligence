@@ -1,0 +1,190 @@
+[
+  {
+    "code": "residential_apartment",
+    "name": "Residential Apartment"
+  },
+  {
+    "code": "residential_house",
+    "name": "Residential House"
+  },
+  {
+    "code": "mixed_use_building",
+    "name": "Mixed Use Building"
+  },
+  {
+    "code": "residential_dormitory",
+    "name": "Residential Dormitory"
+  },
+  {
+    "code": "education_kindergarten",
+    "name": "Education Kindergarten"
+  },
+  {
+    "code": "education_school_primary",
+    "name": "Education School Primary"
+  },
+  {
+    "code": "education_school_secondary",
+    "name": "Education School Secondary"
+  },
+  {
+    "code": "education_lyceum",
+    "name": "Education Lyceum"
+  },
+  {
+    "code": "education_university",
+    "name": "Education University"
+  },
+  {
+    "code": "education_vocational_college",
+    "name": "Education Vocational College"
+  },
+  {
+    "code": "health_clinic",
+    "name": "Health Clinic"
+  },
+  {
+    "code": "health_hospital",
+    "name": "Health Hospital"
+  },
+  {
+    "code": "health_pharmacy",
+    "name": "Health Pharmacy"
+  },
+  {
+    "code": "health_diagnostic_center",
+    "name": "Health Diagnostic Center"
+  },
+  {
+    "code": "health_dental_clinic",
+    "name": "Health Dental Clinic"
+  },
+  {
+    "code": "retail_convenience_store",
+    "name": "Retail Convenience Store"
+  },
+  {
+    "code": "retail_supermarket",
+    "name": "Retail Supermarket"
+  },
+  {
+    "code": "retail_market",
+    "name": "Retail Market"
+  },
+  {
+    "code": "retail_mall",
+    "name": "Retail Mall"
+  },
+  {
+    "code": "service_bank",
+    "name": "Service Bank"
+  },
+  {
+    "code": "amenity_cafe",
+    "name": "Amenity Cafe"
+  },
+  {
+    "code": "amenity_restaurant",
+    "name": "Amenity Restaurant"
+  },
+  {
+    "code": "hospitality_hotel",
+    "name": "Hospitality Hotel"
+  },
+  {
+    "code": "hospitality_hostel",
+    "name": "Hospitality Hostel"
+  },
+  {
+    "code": "office_building",
+    "name": "Office Building"
+  },
+  {
+    "code": "government_admin",
+    "name": "Government Admin"
+  },
+  {
+    "code": "service_post_office",
+    "name": "Service Post Office"
+  },
+  {
+    "code": "community_center",
+    "name": "Community Center"
+  },
+  {
+    "code": "emergency_fire_station",
+    "name": "Emergency Fire Station"
+  },
+  {
+    "code": "security_police_station",
+    "name": "Security Police Station"
+  },
+  {
+    "code": "emergency_ambulance_station",
+    "name": "Emergency Ambulance Station"
+  },
+  {
+    "code": "transport_bus_stop",
+    "name": "Transport Bus Stop"
+  },
+  {
+    "code": "transport_taxi_stand",
+    "name": "Transport Taxi Stand"
+  },
+  {
+    "code": "parking_multilevel",
+    "name": "Parking Multilevel"
+  },
+  {
+    "code": "parking_surface",
+    "name": "Parking Surface"
+  },
+  {
+    "code": "mobility_bike_station",
+    "name": "Mobility Bike Station"
+  },
+  {
+    "code": "utility_power_substation",
+    "name": "Utility Power Substation"
+  },
+  {
+    "code": "utility_transformer",
+    "name": "Utility Transformer"
+  },
+  {
+    "code": "utility_water_pump",
+    "name": "Utility Water Pump"
+  },
+  {
+    "code": "utility_wastewater_pump",
+    "name": "Utility Wastewater Pump"
+  },
+  {
+    "code": "utility_telecom_tower",
+    "name": "Utility Telecom Tower"
+  },
+  {
+    "code": "green_park",
+    "name": "Green Park"
+  },
+  {
+    "code": "green_square",
+    "name": "Green Square"
+  },
+  {
+    "code": "recreation_playground",
+    "name": "Recreation Playground"
+  },
+  {
+    "code": "sport_complex",
+    "name": "Sport Complex"
+  },
+  {
+    "code": "culture_library",
+    "name": "Culture Library"
+  },
+  {
+    "code": "culture_center",
+    "name": "Culture Center"
+  }
+]

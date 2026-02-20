@@ -1,0 +1,294 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(0.99 0.005 260);
+  --foreground: oklch(0.2 0.04 260);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.04 260);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.04 260);
+  --primary: oklch(0.42 0.12 260);
+  --primary-foreground: oklch(0.98 0.005 260);
+  --secondary: oklch(0.92 0.01 260);
+  --secondary-foreground: oklch(0.3 0.04 260);
+  --muted: oklch(0.96 0.005 260);
+  --muted-foreground: oklch(0.45 0.03 260);
+  --accent: oklch(0.9 0.02 260);
+  --accent-foreground: oklch(0.25 0.05 260);
+  --destructive: oklch(0.55 0.18 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.01 260);
+  --input: oklch(0.9 0.01 260);
+  --ring: oklch(0.42 0.12 260);
+  --chart-1: oklch(0.42 0.12 260);
+  --chart-2: oklch(0.5 0.1 260);
+  --chart-3: oklch(0.6 0.08 260);
+  --chart-4: oklch(0.7 0.06 260);
+  --chart-5: oklch(0.8 0.04 260);
+  --sidebar: oklch(0.98 0.005 260);
+  --sidebar-foreground: oklch(0.2 0.04 260);
+  --sidebar-primary: oklch(0.42 0.12 260);
+  --sidebar-primary-foreground: oklch(0.98 0.005 260);
+  --sidebar-accent: oklch(0.94 0.01 260);
+  --sidebar-accent-foreground: oklch(0.2 0.04 260);
+  --sidebar-border: oklch(0.9 0.01 260);
+  --sidebar-ring: oklch(0.42 0.12 260);
+  --font-sans: "Inter", sans-serif;
+  --font-serif: "Source Serif 4", serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --radius: 0.375rem;
+
+  /* Map polygon colors — softer, professional (same hue, lower chroma) */
+  --zone-border: oklch(0.55 0.06 260);
+  --zone-fill: oklch(0.55 0.06 260);
+  --zone-hover-fill: oklch(0.58 0.07 260);
+  --zone-selected-border: oklch(0.5 0.08 260);
+  --zone-selected-fill: oklch(0.5 0.08 260);
+  --zone-label-color: var(--primary-foreground);
+  --object-in-plan-fill: oklch(0.52 0.07 260);
+  --object-in-plan-border: oklch(0.5 0.08 260);
+  --object-outside-fill: var(--muted-foreground);
+  --object-outside-border: var(--muted-foreground);
+
+  --ai-gradient-end: oklch(0.55 0.24 280);
+  --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl:
+    0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0 1px 3px 0px hsl(0 0% 0% / 0.25);
+  --shadow-google:
+    0 1px 3px 0px hsl(0 0% 0% / 0.05), 0 1px 2px -1px hsl(0 0% 0% / 0.05);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: oklch(0.15 0.02 260);
+  --foreground: oklch(0.98 0.01 260);
+  --card: oklch(0.18 0.02 260);
+  --card-foreground: oklch(0.98 0.01 260);
+  --popover: oklch(0.18 0.02 260);
+  --popover-foreground: oklch(0.98 0.01 260);
+  --primary: oklch(0.55 0.1 260);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.22 0.02 260);
+  --secondary-foreground: oklch(0.95 0.01 260);
+  --muted: oklch(0.2 0.02 260);
+  --muted-foreground: oklch(0.7 0.02 260);
+  --accent: oklch(0.25 0.03 260);
+  --accent-foreground: oklch(0.98 0.01 260);
+  --destructive: oklch(0.45 0.15 25);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.22 0.02 260);
+  --input: oklch(0.22 0.02 260);
+  --ring: oklch(0.55 0.1 260);
+  --chart-1: oklch(0.55 0.1 260);
+  --chart-2: oklch(0.45 0.08 260);
+  --chart-3: oklch(0.35 0.06 260);
+  --chart-4: oklch(0.25 0.04 260);
+  --chart-5: oklch(0.15 0.02 260);
+  --sidebar: oklch(0.15 0.02 260);
+  --sidebar-foreground: oklch(0.98 0.01 260);
+  --sidebar-primary: oklch(0.55 0.1 260);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.2 0.02 260);
+  --sidebar-accent-foreground: oklch(0.98 0.01 260);
+  --sidebar-border: oklch(0.22 0.02 260);
+  --sidebar-ring: oklch(0.55 0.1 260);
+
+  /* Map polygon colors — softer, professional (dark) */
+  --zone-border: oklch(0.5 0.05 260);
+  --zone-fill: oklch(0.5 0.05 260);
+  --zone-hover-fill: oklch(0.52 0.06 260);
+  --zone-selected-border: oklch(0.55 0.07 260);
+  --zone-selected-fill: oklch(0.55 0.07 260);
+  --object-in-plan-fill: oklch(0.52 0.06 260);
+  --object-in-plan-border: oklch(0.55 0.07 260);
+  --object-outside-fill: var(--muted-foreground);
+  --object-outside-border: var(--muted-foreground);
+
+  --ai-gradient-end: oklch(0.5 0.2 280);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+  --shadow-google: var(--shadow-google);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+  background: var(--background);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 0;
+}
+
+.leaflet-popup-content {
+  margin: 0;
+}
+
+.leaflet-popup-close-button {
+  display: none;
+}
+
+/* When editing geometry, show grab cursor over polygons so user can drag to move */
+.leaflet-edit-mode .leaflet-overlay-pane .leaflet-interactive {
+  cursor: grab;
+}
+.leaflet-edit-mode .leaflet-overlay-pane .leaflet-interactive:active {
+  cursor: grabbing;
+}
+
+/* Custom map edit markers: corners (vertex), edge midpoints (add vertex), center (move) */
+.leaflet-marker-icon.map-edit-vertex,
+.leaflet-marker-icon.map-edit-middle,
+.leaflet-marker-icon.map-edit-move,
+.map-edit-vertex.leaflet-div-icon,
+.map-edit-middle.leaflet-div-icon,
+.map-edit-move.leaflet-div-icon {
+  box-sizing: border-box !important;
+  pointer-events: auto !important;
+}
+
+/* Corner handles – square, drag to reshape (always visible) */
+.leaflet-marker-icon.map-edit-vertex,
+.map-edit-vertex.leaflet-div-icon {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  margin-left: -9px !important;
+  margin-top: -9px !important;
+  background: var(--background, #ffffff) !important;
+  border: 3px solid var(--primary, #2563eb) !important;
+  border-radius: 2px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Edge midpoint handles – circle with + (always visible) */
+.leaflet-marker-icon.map-edit-middle,
+.map-edit-middle.leaflet-div-icon {
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  margin-left: -9px !important;
+  margin-top: -9px !important;
+  background: var(--background, #ffffff) !important;
+  border: 2px solid var(--primary, #2563eb) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) !important;
+}
+
+.map-edit-middle.leaflet-div-icon::after,
+.leaflet-marker-icon.map-edit-middle::after {
+  content: "+";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--primary, #2563eb);
+  line-height: 1;
+}
+
+/* Center handle – drag to move whole shape (always visible) */
+.leaflet-marker-icon.map-edit-move,
+.map-edit-move.leaflet-div-icon {
+  width: 20px !important;
+  height: 20px !important;
+  min-width: 20px !important;
+  min-height: 20px !important;
+  margin-left: -10px !important;
+  margin-top: -10px !important;
+  background: var(--primary, #2563eb) !important;
+  border: 2px solid var(--background, #ffffff) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  cursor: move !important;
+}
+
+/* Zoom-responsive scale for edit markers (--map-zoom set by MapZoomSync) */
+.leaflet-container .leaflet-marker-icon.map-edit-vertex,
+.leaflet-container .leaflet-marker-icon.map-edit-middle,
+.leaflet-container .leaflet-marker-icon.map-edit-move,
+.leaflet-container .map-edit-vertex.leaflet-div-icon,
+.leaflet-container .map-edit-middle.leaflet-div-icon,
+.leaflet-container .map-edit-move.leaflet-div-icon {
+  transform: scale(calc(var(--map-zoom, 15) / 15));
+  transform-origin: center;
+}

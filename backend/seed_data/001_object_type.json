@@ -1,0 +1,26 @@
+[
+  {
+    "code": "building",
+    "name": "Building"
+  },
+  {
+    "code": "facility",
+    "name": "Facility"
+  },
+  {
+    "code": "poi",
+    "name": "POI"
+  },
+  {
+    "code": "transport_node",
+    "name": "Transport node"
+  },
+  {
+    "code": "utility_node",
+    "name": "Utility node"
+  },
+  {
+    "code": "green_space",
+    "name": "Green space"
+  }
+]
