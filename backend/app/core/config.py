@@ -55,7 +55,7 @@ class Settings(BaseSettings):
 
     # File upload
     UPLOAD_DIR: str = Field(
-        default="./data/uploads",
+        default="./uploads",
         description="Directory for uploaded files",
     )
     MAX_FILE_SIZE: int = Field(

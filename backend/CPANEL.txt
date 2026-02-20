@@ -22,5 +22,21 @@ Environment variables (ДОБАВИТЬ ПЕРЕМЕННУЮ):
 After creating the app:
   1. Upload backend code to the application root.
   2. In that folder, create/activate venv and run: pip install -r requirements.txt
-  3. Run migrations if needed: alembic upgrade head
+  3. Run migrations (see below).
   4. Restart the application in cPanel.
+
+How to run migrations
+---------------------
+Option A – cPanel "Execute python script" (Выполнить python скрипт):
+  1. In "Введите путь к файлу скрипта" enter the path to the migrate script.
+     If app root is repositories/master-plan-intelligence/backend, use:
+       run_migrate.py
+     or the full path, e.g.:
+       repositories/master-plan-intelligence/backend/run_migrate.py
+  2. Click "► Запустить скрипт" (Run script).
+
+Option B – cPanel Terminal or SSH:
+  cd repositories/master-plan-intelligence/backend
+  source venv/bin/activate   # or however your venv is activated
+  python run_migrate.py
+  # or: alembic upgrade head
