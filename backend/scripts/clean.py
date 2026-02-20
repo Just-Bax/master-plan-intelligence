@@ -19,3 +19,7 @@ def main():
             cleaned_count += 1
 
     print(f"Cache cleaned. Removed {cleaned_count} items.")
+
+
+if __name__ == "__main__":
+    main()

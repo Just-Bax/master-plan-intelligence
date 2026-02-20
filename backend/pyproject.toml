@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "AI platform for master plan project evaluation"
 requires-python = ">=3.11"
 dependencies = [
-    "a2wsgi>=1.10.0",
     "fastapi>=0.115.0",
     "uvicorn[standard]>=0.32.0",
     "sqlalchemy[asyncio]>=2.0.0",
@@ -35,3 +34,4 @@ packages = ["app"]
 
 [project.scripts]
 clean = "scripts.clean:main"
+migrate = "scripts.run_migrate:main"

@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """
 Run Alembic migrations (upgrade to head).
-Use from cPanel: "Execute python script" -> path to this file, e.g.:
-  run_migrate.py
-or full path:
-  repositories/master-plan-intelligence/backend/run_migrate.py
-Do NOT enter "alembic" — that is a package, not a script.
+
+Usage (from backend directory):
+  python run_migrate.py
+  # or: alembic upgrade head
 """
+
 import os
 import sys
+
 
 def main() -> None:
     backend_dir = os.path.dirname(os.path.abspath(__file__))
@@ -24,6 +25,7 @@ def main() -> None:
         sys.exit(1)
     cfg = Config(alembic_ini)
     command.upgrade(cfg, "head")
+
 
 if __name__ == "__main__":
     main()

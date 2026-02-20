@@ -1,0 +1,13 @@
+# Env (use backend/.env and frontend/.env; see .env.example in each)
+.env
+.env.local
+.env.*.local
+
+# IDE / OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Archives (optional)
+*.zip
