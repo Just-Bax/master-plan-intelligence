@@ -54,6 +54,7 @@ export const API_PATHS = {
   PROJECT: "/project",
   PROJECT_BY_ID: (id: number) => `/project/${id}`,
   AI_CHAT: "/ai/chat",
+  AI_REPORT: "/ai/report",
 } as const;
 
 export { API_BASE_URL };

@@ -16,6 +16,12 @@
     "activeSuffix": " (Активен)",
     "noPlans": "Нет мастер-планов.",
     "noPlansHint": " Нажмите + чтобы создать первый.",
+    "generateReportButton": "Сформировать отчёт по мастер-плану",
+    "reportGenerating": "Формирование…",
+    "reportError": "Ошибка формирования отчёта",
+    "developmentReportHeading": "Отчёт по развитию",
+    "viewReport": "Открыть отчёт",
+    "reportGeneratedAt": "Сформирован {{date}}",
     "aiButton": "Спросить AI помощника",
     "aiSubtitle": "Мгновенная аналитика по зонированию и нормативам",
     "allPlans": "Все",
@@ -24,7 +30,82 @@
     "runReportButton": "Сформировать отчёт",
     "reportPanelTitle": "Отчёт",
     "reportContextPlan": "План",
-    "reportPanelPlaceholder": "Сформировать отчёт по выбранному мастер-плану. Генерация отчёта может быть подключена здесь."
+    "reportPanelPlaceholder": "Сформировать отчёт по выбранному мастер-плану. Генерация отчёта может быть подключена здесь.",
+    "reportSummaryObjects": "Объекты",
+    "reportSummaryPopulation": "Население (оценка)",
+    "reportSummaryNewProjects": "Новые проекты",
+    "reportViewFullReport": "Открыть полный отчёт",
+    "reportTitle": "Отчёт по развитию",
+    "reportGeneratedOn": "Сформирован",
+    "reportSectionAssumptions": "Допущения",
+    "reportSectionBaseline": "Базовый уровень",
+    "reportSectionNeeds": "Потребности и дефициты",
+    "reportSectionPhases": "Фазы",
+    "reportSectionQuestions": "Вопросы",
+    "reportPhase": "Фаза",
+    "reportProjectsSummary": "Сводка по проектам",
+    "reportRawJson": "Исходный JSON",
+    "reportTableServiceType": "Тип объекта",
+    "reportTableNewProjects": "Новых проектов",
+    "reportTableCapacityAdded": "Добавлено мощностей",
+    "reportAssumption": {
+      "avg_household_size": "Средний размер домохозяйства",
+      "school_age_share": "Доля школьного возраста",
+      "kindergarten_age_share": "Доля дошкольного возраста",
+      "kindergarten_coverage": "Охват детсадами",
+      "school_unit_capacity": "Вместимость школы (мест)",
+      "kindergarten_unit_capacity": "Вместимость детсада (мест)",
+      "parking_spaces_per_unit": "Паркомест на квартиру",
+      "parking_multilevel_capacity": "Вместимость многоуровневой парковки",
+      "env_risk_max": "Макс. эко-риск (строить сейчас)",
+      "park_rule_people_per_green_object": "Жителей на зелёный объект"
+    },
+    "reportGap": {
+      "school_seats_gap": "Дефицит школьных мест",
+      "kindergarten_seats_gap": "Дефицит мест в детсадах",
+      "parking_spaces_gap": "Дефицит парковочных мест",
+      "green_objects_gap": "Дефицит зелёных объектов"
+    },
+    "reportServiceType": {
+      "school": "Школа",
+      "kindergarten": "Детский сад",
+      "clinic": "Поликлиника",
+      "parking_multilevel": "Многоуровневая парковка",
+      "green_space": "Зелёная зона"
+    },
+    "reportBaseline": {
+      "objects_total": "Объектов всего",
+      "housing_units_total": "Жилых единиц",
+      "population_estimated": "Население (оценка)",
+      "school_seats_total": "Школьных мест",
+      "kindergarten_seats_total": "Мест в детсадах",
+      "hospital_beds_total": "Больничных коек",
+      "clinic_capacity_total": "Вместимость поликлиник",
+      "parking_spaces_total": "Парковочных мест",
+      "green_objects_total": "Зелёных объектов"
+    },
+    "reportProject": {
+      "projectId": "Проект",
+      "serviceType": "Тип",
+      "action": "Действие",
+      "eligibility": "Пригодность",
+      "capacityAdded": "Добавлено мощностей",
+      "targetObject": "Целевой объект",
+      "backupObjects": "Резервные объекты",
+      "whyThisObject": "Почему этот объект",
+      "requiredInterventions": "Необходимые мероприятия"
+    },
+    "reportAction": {
+      "NEW_BUILD": "Новое строительство",
+      "EXPAND": "Расширение",
+      "UPGRADE": "Модернизация",
+      "CONVERT": "Конверсия"
+    },
+    "reportEligibility": {
+      "BUILD_NOW": "Строить сейчас",
+      "CONDITIONAL": "Условно",
+      "REJECT": "Отклонить"
+    }
   },
   "masterPlanForm": {
     "titleEdit": "Редактировать мастер-план",

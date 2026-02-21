@@ -26,5 +26,6 @@ class MasterPlanResponse(MasterPlanBase):
     updated_by: int | None = None
     geometry: GeoJSONGeometry | None = None
     area_m2: float | None = None
+    ai_development_report: dict | None = None
 
     model_config = {"from_attributes": True, "populate_by_name": True}

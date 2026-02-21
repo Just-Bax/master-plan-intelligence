@@ -51,6 +51,7 @@ def plan_to_response(
             "updated_at": plan.updated_at,
             "updated_by": plan.updated_by,
             "area_m2": rounded_area,
+            "ai_development_report": plan.ai_development_report,
         }
     )
 
@@ -149,3 +150,16 @@ async def delete_master_plan(
 ) -> None:
     plan, _ = await get_by_id(db, master_plan_id)
     await db.delete(plan)
+
+
+async def update_ai_development_report(
+    db: AsyncSession,
+    master_plan_id: int,
+    report: dict[str, Any],
+) -> MasterPlan:
+    """Update master plan ai_development_report and return the plan."""
+    plan, _ = await get_by_id(db, master_plan_id)
+    plan.ai_development_report = report
+    await db.flush()
+    await db.refresh(plan)
+    return plan

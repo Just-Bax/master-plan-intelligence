@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SparklesIcon } from "@heroicons/react/24/outline";
+import {
+  DocumentChartBarIcon,
+  SparklesIcon,
+} from "@heroicons/react/24/outline";
 import { Button } from "@/components/ui/button";
-import { SIDEBAR_WIDTH_PX } from "@/constants";
+import { API_PATHS, SIDEBAR_WIDTH_PX } from "@/constants";
+import { apiPost } from "@/lib/api";
 import { MasterPlanSelect } from "@/components/sidebar/MasterPlanSelect";
 import { SidebarPlansSkeleton } from "@/components/sidebar/SidebarSkeletons";
 import { MasterPlanInfo } from "@/components/sidebar/MasterPlanInfo";
@@ -21,12 +25,15 @@ export function Sidebar() {
     masterPlansLoading,
     masterPlansError,
     setFlyToTarget,
+    refetchMasterPlans,
     onMasterPlanCreate,
     onMasterPlanUpdate,
     onMasterPlanDelete,
     projects,
     activeProjectId,
   } = useMapData();
+  const [reportLoading, setReportLoading] = useState(false);
+  const [reportError, setReportError] = useState<string | null>(null);
 
   const activeMasterPlan =
     activeId !== null
@@ -89,6 +96,40 @@ export function Sidebar() {
         loading={masterPlansLoading}
       />
       <div className="shrink-0 space-y-2 border-t p-4">
+        <Button
+          variant="outline"
+          className="w-full"
+          size="default"
+          disabled={!activeMasterPlan || reportLoading}
+          onClick={async () => {
+            if (!activeMasterPlan) return;
+            setReportError(null);
+            setReportLoading(true);
+            try {
+              await apiPost<{ report: Record<string, unknown> }>(
+                API_PATHS.AI_REPORT,
+                { master_plan_id: activeMasterPlan.id }
+              );
+              await refetchMasterPlans();
+            } catch (e) {
+              setReportError(
+                e instanceof Error ? e.message : t("sidebar.reportError")
+              );
+            } finally {
+              setReportLoading(false);
+            }
+          }}
+        >
+          <DocumentChartBarIcon className="size-4 mr-2" />
+          {reportLoading
+            ? t("sidebar.reportGenerating")
+            : t("sidebar.generateReportButton")}
+        </Button>
+        {reportError && (
+          <p className="text-center text-xs text-destructive" role="alert">
+            {reportError}
+          </p>
+        )}
         <Button
           className="w-full bg-gradient-to-r from-primary to-[var(--ai-gradient-end)] text-primary-foreground hover:opacity-90"
           size="default"

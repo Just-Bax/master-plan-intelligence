@@ -36,8 +36,12 @@ export function useAiChat(
         const response = await apiPost<{ message: string }>(API_PATHS.AI_CHAT, {
           messages: history,
           master_plan_id: activeMasterPlan?.id ?? null,
-          object_id: selectedObjects.length > 0 ? selectedObjects[0].id : null,
+          object_ids:
+            selectedObjects.length > 0
+              ? selectedObjects.map((o) => o.id)
+              : null,
           project_id: projectId ?? null,
+          locale: i18n.language || undefined,
         });
 
         const aiMsg: ChatMessage = {

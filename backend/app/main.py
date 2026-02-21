@@ -45,6 +45,7 @@ REST endpoints (all under API base URL, JSON unless noted):
 
   AI (tag: ai)
     POST /ai/chat
+    POST /ai/report
 
   Files (tag: file). GET requires auth.
     POST /file

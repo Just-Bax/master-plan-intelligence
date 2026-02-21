@@ -16,6 +16,12 @@
     "activeSuffix": " (Faol)",
     "noPlans": "Master-rejalar yo'q.",
     "noPlansHint": " Birinchisini yaratish uchun + bosing.",
+    "generateReportButton": "Rivojlanish hisobotini yaratish",
+    "reportGenerating": "Yaratilmoqda…",
+    "reportError": "Hisobot yaratishda xato",
+    "developmentReportHeading": "Rivojlanish hisoboti",
+    "viewReport": "Hisobotni ko'rish",
+    "reportGeneratedAt": "Yaratilgan sana: {{date}}",
     "aiButton": "AI yordamchisidan so'rang",
     "aiSubtitle": "Zonlash va me'yorlar bo'yicha tezkor tahlil",
     "allPlans": "Barchasi",
@@ -24,7 +30,82 @@
     "runReportButton": "Hisobot yaratish",
     "reportPanelTitle": "Hisobot",
     "reportContextPlan": "Reja",
-    "reportPanelPlaceholder": "Tanlangan master-reja uchun hisobot yarating. Hisobot generatsiyasi shu yerda ulanishi mumkin."
+    "reportPanelPlaceholder": "Tanlangan master-reja uchun hisobot yarating. Hisobot generatsiyasi shu yerda ulanishi mumkin.",
+    "reportSummaryObjects": "Ob'ektlar",
+    "reportSummaryPopulation": "Aholi (taxminan)",
+    "reportSummaryNewProjects": "Yangi loyihalar",
+    "reportViewFullReport": "To'liq hisobotni ko'rish",
+    "reportTitle": "Rivojlanish hisoboti",
+    "reportGeneratedOn": "Yaratilgan sana",
+    "reportSectionAssumptions": "Farazlar",
+    "reportSectionBaseline": "Bazaviy ko'rsatkichlar",
+    "reportSectionNeeds": "Ehtiyojlar va yetishmovchiliklar",
+    "reportSectionPhases": "Bosqichlar",
+    "reportSectionQuestions": "Savollar",
+    "reportPhase": "Bosqich",
+    "reportProjectsSummary": "Loyihalar xulosasi",
+    "reportRawJson": "JSON matn",
+    "reportTableServiceType": "Xizmat turi",
+    "reportTableNewProjects": "Yangi loyihalar",
+    "reportTableCapacityAdded": "Qo'shilgan sig'im",
+    "reportAssumption": {
+      "avg_household_size": "O'rtacha uy xo'jaligi",
+      "school_age_share": "Maktab yoshi ulushi",
+      "kindergarten_age_share": "Bog'cha yoshi ulushi",
+      "kindergarten_coverage": "Bog'chalar qamrovi",
+      "school_unit_capacity": "Maktab sig'imi (o'rin)",
+      "kindergarten_unit_capacity": "Bog'cha sig'imi (o'rin)",
+      "parking_spaces_per_unit": "Kvartiraga to'xtash joylari",
+      "parking_multilevel_capacity": "Ko'p qavatli to'xtash sig'imi",
+      "env_risk_max": "Maks. atrof-muhit xavfi",
+      "park_rule_people_per_green_object": "Yashil ob'ektga aholi"
+    },
+    "reportGap": {
+      "school_seats_gap": "Maktab o'rinlari yetishmovchiligi",
+      "kindergarten_seats_gap": "Bog'cha o'rinlari yetishmovchiligi",
+      "parking_spaces_gap": "To'xtash joylari yetishmovchiligi",
+      "green_objects_gap": "Yashil ob'ektlar yetishmovchiligi"
+    },
+    "reportServiceType": {
+      "school": "Maktab",
+      "kindergarten": "Bog'cha",
+      "clinic": "Poliklinika",
+      "parking_multilevel": "Ko'p qavatli to'xtash",
+      "green_space": "Yashil zona"
+    },
+    "reportBaseline": {
+      "objects_total": "Ob'ektlar jami",
+      "housing_units_total": "Turar joy birliklari",
+      "population_estimated": "Aholi (taxminan)",
+      "school_seats_total": "Maktab o'rinlari",
+      "kindergarten_seats_total": "Bog'cha o'rinlari",
+      "hospital_beds_total": "Kasalxona karavotlari",
+      "clinic_capacity_total": "Poliklinika sig'imi",
+      "parking_spaces_total": "To'xtash joylari",
+      "green_objects_total": "Yashil ob'ektlar"
+    },
+    "reportProject": {
+      "projectId": "Loyiha",
+      "serviceType": "Tur",
+      "action": "Harakat",
+      "eligibility": "Muvofiqlik",
+      "capacityAdded": "Qo'shilgan sig'im",
+      "targetObject": "Maqsadli ob'ekt",
+      "backupObjects": "Zaxira ob'ektlar",
+      "whyThisObject": "Nima uchun bu ob'ekt",
+      "requiredInterventions": "Talab qilinadigan choralar"
+    },
+    "reportAction": {
+      "NEW_BUILD": "Yangi qurilish",
+      "EXPAND": "Kengaytirish",
+      "UPGRADE": "Modernizatsiya",
+      "CONVERT": "Konversiya"
+    },
+    "reportEligibility": {
+      "BUILD_NOW": "Hozir qurish",
+      "CONDITIONAL": "Shartli",
+      "REJECT": "Rad etish"
+    }
   },
   "masterPlanForm": {
     "titleEdit": "Master-rejani tahrirlash",

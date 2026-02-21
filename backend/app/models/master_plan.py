@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING, Any
 
 from geoalchemy2 import Geometry
 from sqlalchemy import DateTime, ForeignKey, Integer, String, func
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.database import Base
@@ -34,3 +35,4 @@ class MasterPlan(Base):
     updated_by: Mapped[int | None] = mapped_column(
         ForeignKey("user.id", ondelete="SET NULL"), nullable=True, index=True
     )
+    ai_development_report: Mapped[dict | None] = mapped_column(JSONB, nullable=True)

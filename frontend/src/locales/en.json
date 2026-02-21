@@ -16,6 +16,12 @@
     "activeSuffix": " (Active)",
     "noPlans": "No master plans.",
     "noPlansHint": " Click + to create the first one.",
+    "generateReportButton": "Generate development report",
+    "reportGenerating": "Generating…",
+    "reportError": "Report generation failed",
+    "developmentReportHeading": "Development report",
+    "viewReport": "View report",
+    "reportGeneratedAt": "Generated on {{date}}",
     "aiButton": "Ask AI assistant",
     "aiSubtitle": "Instant analytics on zoning and regulations",
     "allPlans": "All",
@@ -24,7 +30,82 @@
     "runReportButton": "Run report",
     "reportPanelTitle": "Report",
     "reportContextPlan": "Plan",
-    "reportPanelPlaceholder": "Run a report for the selected master plan. Report generation can be wired here."
+    "reportPanelPlaceholder": "Run a report for the selected master plan. Report generation can be wired here.",
+    "reportSummaryObjects": "Objects",
+    "reportSummaryPopulation": "Population (est.)",
+    "reportSummaryNewProjects": "New projects",
+    "reportViewFullReport": "View full report",
+    "reportTitle": "Development report",
+    "reportGeneratedOn": "Generated on",
+    "reportSectionAssumptions": "Assumptions",
+    "reportSectionBaseline": "Baseline",
+    "reportSectionNeeds": "Needs & gaps",
+    "reportSectionPhases": "Phases",
+    "reportSectionQuestions": "Questions",
+    "reportPhase": "Phase",
+    "reportProjectsSummary": "Projects summary",
+    "reportRawJson": "Raw JSON",
+    "reportTableServiceType": "Service type",
+    "reportTableNewProjects": "New projects",
+    "reportTableCapacityAdded": "Capacity added",
+    "reportAssumption": {
+      "avg_household_size": "Avg. household size",
+      "school_age_share": "School-age share",
+      "kindergarten_age_share": "Kindergarten-age share",
+      "kindergarten_coverage": "Kindergarten coverage",
+      "school_unit_capacity": "School unit capacity (seats)",
+      "kindergarten_unit_capacity": "Kindergarten unit capacity (seats)",
+      "parking_spaces_per_unit": "Parking spaces per housing unit",
+      "parking_multilevel_capacity": "Multilevel parking capacity",
+      "env_risk_max": "Max env. risk (build now)",
+      "park_rule_people_per_green_object": "People per green object"
+    },
+    "reportGap": {
+      "school_seats_gap": "School seats gap",
+      "kindergarten_seats_gap": "Kindergarten seats gap",
+      "parking_spaces_gap": "Parking spaces gap",
+      "green_objects_gap": "Green objects gap"
+    },
+    "reportServiceType": {
+      "school": "School",
+      "kindergarten": "Kindergarten",
+      "clinic": "Clinic",
+      "parking_multilevel": "Multilevel parking",
+      "green_space": "Green space"
+    },
+    "reportBaseline": {
+      "objects_total": "Objects total",
+      "housing_units_total": "Housing units",
+      "population_estimated": "Population (est.)",
+      "school_seats_total": "School seats",
+      "kindergarten_seats_total": "Kindergarten seats",
+      "hospital_beds_total": "Hospital beds",
+      "clinic_capacity_total": "Clinic capacity",
+      "parking_spaces_total": "Parking spaces",
+      "green_objects_total": "Green objects"
+    },
+    "reportProject": {
+      "projectId": "Project",
+      "serviceType": "Type",
+      "action": "Action",
+      "eligibility": "Eligibility",
+      "capacityAdded": "Capacity added",
+      "targetObject": "Target object",
+      "backupObjects": "Backup objects",
+      "whyThisObject": "Why this object",
+      "requiredInterventions": "Required interventions"
+    },
+    "reportAction": {
+      "NEW_BUILD": "New build",
+      "EXPAND": "Expand",
+      "UPGRADE": "Upgrade",
+      "CONVERT": "Convert"
+    },
+    "reportEligibility": {
+      "BUILD_NOW": "Build now",
+      "CONDITIONAL": "Conditional",
+      "REJECT": "Reject"
+    }
   },
   "masterPlanForm": {
     "titleEdit": "Edit master plan",

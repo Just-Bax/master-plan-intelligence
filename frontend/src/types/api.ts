@@ -4,6 +4,9 @@ export interface User {
   created_at: string;
 }
 
+/** 15-year development report JSON from AI (assumptions, baseline, needs_15y, phases, questions). */
+export type AiDevelopmentReport = Record<string, unknown>;
+
 export interface MasterPlan {
   id: number;
   name: string;
@@ -14,6 +17,8 @@ export interface MasterPlan {
   created_by: number | null;
   updated_at: string;
   updated_by: number | null;
+  /** AI-generated 15-year development report (JSON). Omitted if column not yet migrated. */
+  ai_development_report?: AiDevelopmentReport | null;
 }
 
 export interface MasterPlanFormData {

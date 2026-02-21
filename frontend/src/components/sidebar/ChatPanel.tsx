@@ -6,6 +6,8 @@ import {
   SparklesIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { useAiChat } from "@/hooks/useAiChat";
@@ -143,7 +145,15 @@ export function ChatPanel({
                     : "bg-primary text-primary-foreground"
                 )}
               >
-                {msg.content}
+                {msg.role === "ai" ? (
+                  <div className="chat-markdown [&_ul]:list-disc [&_ol]:list-decimal [&_ul]:ml-4 [&_ol]:ml-4 [&_li]:my-0.5 [&_p]:my-1 [&_p:first]:mt-0 [&_p:last]:mb-0 [&_strong]:font-semibold [&_code]:rounded [&_code]:bg-muted-foreground/15 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-xs">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {msg.content}
+                    </ReactMarkdown>
+                  </div>
+                ) : (
+                  msg.content
+                )}
               </div>
             </div>
           ))}
