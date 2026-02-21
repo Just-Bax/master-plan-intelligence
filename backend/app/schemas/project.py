@@ -31,9 +31,3 @@ class ProjectResponse(ProjectBase):
 class AnalyzeStubResponse(BaseModel):
     status: str = "stub"
     project_id: int
-
-
-class ReportStubResponse(BaseModel):
-    report_url: str | None = None
-    content: str | None = None
-    project_id: int

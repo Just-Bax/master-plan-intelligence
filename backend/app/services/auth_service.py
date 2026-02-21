@@ -5,6 +5,10 @@ from app.schemas.user import UserCreate
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.constants import (
+    ERROR_MESSAGE_EMAIL_ALREADY_REGISTERED,
+    ERROR_MESSAGE_INCORRECT_EMAIL_OR_PASSWORD,
+)
 from app.core.exceptions import ConflictError, NotFoundError
 
 
@@ -16,7 +20,7 @@ async def login(
     result = await db.execute(select(User).where(User.email == email))
     user = result.scalar_one_or_none()
     if user is None or not verify_password(password, user.hashed_password):
-        raise NotFoundError("Incorrect email or password")
+        raise NotFoundError(ERROR_MESSAGE_INCORRECT_EMAIL_OR_PASSWORD)
     access_token = create_access_token(subject=str(user.id))
     return Token(access_token=access_token)
 
@@ -27,7 +31,7 @@ async def register(
 ) -> Token:
     result = await db.execute(select(User).where(User.email == body.email))
     if result.scalar_one_or_none() is not None:
-        raise ConflictError("Email already registered")
+        raise ConflictError(ERROR_MESSAGE_EMAIL_ALREADY_REGISTERED)
     user = User(
         email=body.email,
         hashed_password=get_password_hash(body.password),

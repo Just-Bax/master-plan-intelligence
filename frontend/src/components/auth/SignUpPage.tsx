@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { MIN_PASSWORD_LENGTH, ROUTES } from "@/constants";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { FormError } from "@/components/ui/form-error";
+import { AuthCard } from "@/components/auth/AuthCard";
 import { useAuth } from "@/hooks/useAuth";
 import { inputClassName } from "@/lib/utils";
 
@@ -41,80 +39,63 @@ export function SignUpPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-4">
-      <Card className="w-full max-w-sm">
-        <CardHeader className="space-y-1 text-center">
-          <h1 className="text-xl font-semibold tracking-tight">
-            {t("auth.appTitle")}
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            {t("auth.signUpSubtitle")}
-          </p>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {error && <FormError>{error}</FormError>}
-            <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium">
-                {t("auth.email")}
-              </label>
-              <input
-                id="email"
-                type="email"
-                autoComplete="email"
-                required
-                className={inputClassName}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t("auth.placeholderEmail")}
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="password" className="text-sm font-medium">
-                {t("auth.password")}
-              </label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                minLength={MIN_PASSWORD_LENGTH}
-                className={inputClassName}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder={t("auth.placeholderPassword")}
-              />
-            </div>
-            <div className="space-y-2">
-              <label htmlFor="confirmPassword" className="text-sm font-medium">
-                {t("auth.confirmPassword")}
-              </label>
-              <input
-                id="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                className={inputClassName}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder={t("auth.placeholderConfirm")}
-              />
-            </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? t("auth.creatingAccount") : t("auth.signUp")}
-            </Button>
-          </form>
-          <p className="text-center text-sm text-muted-foreground">
-            {t("auth.haveAccount")}{" "}
-            <Link
-              to={ROUTES.SIGN_IN}
-              className="font-medium text-primary underline-offset-4 hover:underline"
-            >
-              {t("auth.signIn")}
-            </Link>
-          </p>
-        </CardContent>
-      </Card>
-    </div>
+    <AuthCard
+      title={t("auth.appTitle")}
+      subtitle={t("auth.signUpSubtitle")}
+      error={error || null}
+      onSubmit={handleSubmit}
+      submitLabel={loading ? t("auth.creatingAccount") : t("auth.signUp")}
+      loading={loading}
+      bottomText={t("auth.haveAccount")}
+      bottomLinkTo={ROUTES.SIGN_IN}
+      bottomLinkLabel={t("auth.signIn")}
+    >
+      <div className="space-y-2">
+        <label htmlFor="email" className="text-sm font-medium">
+          {t("auth.email")}
+        </label>
+        <input
+          id="email"
+          type="email"
+          autoComplete="email"
+          required
+          className={inputClassName}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder={t("auth.placeholderEmail")}
+        />
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="password" className="text-sm font-medium">
+          {t("auth.password")}
+        </label>
+        <input
+          id="password"
+          type="password"
+          autoComplete="new-password"
+          required
+          minLength={MIN_PASSWORD_LENGTH}
+          className={inputClassName}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder={t("auth.placeholderPassword")}
+        />
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="confirmPassword" className="text-sm font-medium">
+          {t("auth.confirmPassword")}
+        </label>
+        <input
+          id="confirmPassword"
+          type="password"
+          autoComplete="new-password"
+          required
+          className={inputClassName}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          placeholder={t("auth.placeholderConfirm")}
+        />
+      </div>
+    </AuthCard>
   );
 }

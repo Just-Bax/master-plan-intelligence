@@ -32,6 +32,12 @@ export const CHAT_TYPING_DELAYS_MS = [0, 150, 300] as const;
 /** Sidebar width in pixels. */
 export const SIDEBAR_WIDTH_PX = 380;
 
+/** Object details panel width in pixels. */
+export const OBJECT_DETAILS_PANEL_WIDTH_PX = 360;
+
+/** Display string for empty/null values (e.g. in tables and panels). */
+export const EMPTY_DISPLAY = "—";
+
 export const REACT_QUERY_STALE_TIME_MS = 60_000;
 
 export const ROUTES = {
@@ -54,8 +60,9 @@ export const API_PATHS = {
   PROJECT: "/project",
   PROJECT_BY_ID: (id: number) => `/project/${id}`,
   AI_CHAT: "/ai/chat",
-  AI_REPORT: "/ai/report",
+  AI_REPORT: (masterPlanId: number) => `/ai/report/${masterPlanId}`,
 } as const;
 
 export { API_BASE_URL };
 export * from "@/constants/map";
+export * from "@/constants/mapTiles";

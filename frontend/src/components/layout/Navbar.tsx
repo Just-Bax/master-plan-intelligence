@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ROUTES } from "@/constants";
+import { EMPTY_DISPLAY, ROUTES } from "@/constants";
 import { GlobeAltIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { useTheme } from "@/hooks/useTheme";
 import { useAuth } from "@/hooks/useAuth";
@@ -84,7 +84,9 @@ export function Navbar() {
               role="menu"
             >
               <div className="px-3 py-2 text-sm border-b border-border/50">
-                <p className="font-medium truncate">{user?.email ?? "—"}</p>
+                <p className="font-medium truncate">
+                  {user?.email ?? EMPTY_DISPLAY}
+                </p>
               </div>
               <button
                 type="button"

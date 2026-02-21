@@ -2,42 +2,13 @@ import { useEffect, useState } from "react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { CheckIcon } from "@heroicons/react/24/solid";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
-import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { Button } from "@/components/ui/Button";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import type { NewMasterPlanPlacement } from "@/types/map";
 import { useMapData } from "@/contexts/MapDataContext";
 import { useMapEdit } from "@/contexts/MapEditContext";
-import { MAP_PLACEMENT_CORNERS_COUNT } from "@/constants/map";
-import { circleToPolygon } from "@/lib/geoCircle";
+import { isPlacementComplete, placementToPolygon } from "@/lib/planPlacement";
 import { cn, mapToolbarClassName } from "@/lib/utils";
-import type { GeoJSONGeometry } from "@/types/api";
-
-function isPlacementComplete(
-  placement: NonNullable<NewMasterPlanPlacement>
-): boolean {
-  if (placement.mode === "radius") {
-    return placement.center !== null && placement.radiusFixed === true;
-  }
-  return placement.points.length === MAP_PLACEMENT_CORNERS_COUNT;
-}
-
-function placementToPolygon(
-  placement: NonNullable<NewMasterPlanPlacement>
-): GeoJSONGeometry | null {
-  if (placement.mode === "radius") {
-    if (!placement.center) return null;
-    return circleToPolygon(
-      placement.center[0],
-      placement.center[1],
-      placement.radiusM
-    );
-  }
-  if (placement.points.length !== MAP_PLACEMENT_CORNERS_COUNT) return null;
-  const ring = [...placement.points, placement.points[0]].map(
-    ([lng, lat]) => [lng, lat] as [number, number]
-  );
-  return { type: "Polygon", coordinates: [ring] };
-}
 
 export function MapEditToolbar() {
   const { t } = useTranslation();

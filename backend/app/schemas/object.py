@@ -3,18 +3,15 @@ from typing import Any
 
 from pydantic import BaseModel, field_validator
 
-from app.schemas.geo import GeoJSONGeometry
+from app.core.geography import require_point_geojson
+from app.schemas.geography import GeoJSONGeometry
 
 
 def _validate_point_geometry(v: dict[str, Any] | None) -> dict[str, Any] | None:
-    """Object geometry must be Point with coordinates [lng, lat]."""
+    """Object geometry must be Point with coordinates [lng, lat]. Uses shared validator from core.geo."""
     if v is None:
         return v
-    if v.get("type") != "Point":
-        raise ValueError("Object geometry must be type 'Point'")
-    coords = v.get("coordinates")
-    if not isinstance(coords, (list, tuple)) or len(coords) < 2:
-        raise ValueError("Point geometry must have coordinates [lng, lat]")
+    require_point_geojson(v)
     return v
 
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from app.core.deps import require_current_user
+from app.core.dependencies import require_current_user
 from app.models.user import User
 from app.schemas.user import UserResponse
 from app.services import user_service

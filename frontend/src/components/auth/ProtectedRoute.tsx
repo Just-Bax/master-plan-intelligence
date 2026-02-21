@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { ROUTES } from "@/constants";
 import { useAuth } from "@/hooks/useAuth";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 export function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, isLoading } = useAuth();

@@ -1,5 +1,5 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 import type { NewMasterPlanPlacement } from "@/types/map";

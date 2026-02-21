@@ -1,19 +1,19 @@
 import { useEffect, type RefObject } from "react";
 import L from "leaflet";
 import type { GeometryEditTarget } from "@/types/map";
-import { getBoundsForLayer } from "@/components/map/MapLayerUtils";
+import { getBoundsForLayer } from "@/components/map/mapLayerUtils";
 import {
   flyToBounds,
   getFlyOptionsForObject,
   getFlyOptionsForPlan,
 } from "@/lib/mapFlyTo";
-import type { LayerWithMeta } from "@/components/map/MapLayerUtils";
+import type { LayerWithMeta } from "@/components/map/mapLayerUtils";
 import { MAP_LAYER_META_KEY } from "@/constants/map";
 
 /**
  * Fly map to the layer matching flyToTarget (plan or object), then clear flyToTarget.
  */
-export function useMapDataLayerFlyTo(
+export function useMapFlyTo(
   map: L.Map,
   flyToTarget: GeometryEditTarget,
   setFlyToTarget: (target: GeometryEditTarget) => void,

@@ -3,14 +3,14 @@ from pathlib import Path
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-# Load .env from backend root (so it works from project root or backend dir)
-_BACKEND_ROOT = Path(__file__).resolve().parent.parent.parent
-_ENV_FILE = _BACKEND_ROOT / ".env"
+# Load .env from backend directory (so it works from project root or backend dir)
+_BACKEND_DIRECTORY_PATH = Path(__file__).resolve().parent.parent.parent
+_ENV_FILE_PATH = _BACKEND_DIRECTORY_PATH / ".env"
 
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
-        env_file=str(_ENV_FILE),
+        env_file=str(_ENV_FILE_PATH),
         env_file_encoding="utf-8",
         extra="ignore",
         case_sensitive=True,

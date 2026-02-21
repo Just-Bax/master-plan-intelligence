@@ -1,99 +1,20 @@
 import { useTranslation } from "react-i18next";
 import { MapPinIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { cn } from "@/lib/utils";
 import type { FunctionType, ObjectType, PlanObject } from "@/types/api";
 import {
   getPlanObjectName,
   getPlanObjectArea,
   getPlanObjectLocation,
 } from "@/lib/objectHelpers";
-
-const PANEL_WIDTH_PX = 360;
-const EMPTY = "—";
-
-function formatNum(value: number | null | undefined): string {
-  if (value == null || Number.isNaN(value)) return EMPTY;
-  return value.toLocaleString(undefined, { maximumFractionDigits: 0 });
-}
-
-function formatBool(
-  value: boolean | null | undefined,
-  t: (k: string) => string
-): string {
-  if (value == null) return EMPTY;
-  return value ? t("objectDetails.yes") : t("objectDetails.no");
-}
-
-function formatDate(value: string | null | undefined): string {
-  if (!value) return EMPTY;
-  try {
-    const d = new Date(value);
-    return Number.isNaN(d.getTime()) ? value : d.toLocaleString();
-  } catch {
-    return value;
-  }
-}
-
-/** Resolve object type label: i18n key objectType.<code> with fallback to API name. */
-function getObjectTypeLabel(
-  object: PlanObject,
-  objectTypes: ObjectType[],
-  t: (key: string, opts?: { defaultValue?: string }) => string
-): string {
-  const code =
-    object.object_type_code ??
-    objectTypes.find((ot) => ot.id === object.object_type_id)?.code;
-  const apiName =
-    objectTypes.find((ot) => ot.id === object.object_type_id)?.name ??
-    object.object_type_code;
-  if (!code) return apiName ?? EMPTY;
-  return t(`objectType.${code}`, { defaultValue: apiName ?? code });
-}
-
-/** Resolve function type label: i18n key functionType.<code> with fallback to API name. */
-function getFunctionTypeLabel(
-  object: PlanObject,
-  functionTypes: FunctionType[],
-  t: (key: string, opts?: { defaultValue?: string }) => string
-): string | null {
-  const code =
-    object.function_type_code ??
-    functionTypes.find((ft) => ft.id === object.function_type_id)?.code;
-  const apiName =
-    functionTypes.find((ft) => ft.id === object.function_type_id)?.name ??
-    object.function_type_code;
-  if (!code)
-    return object.function_type_id != null
-      ? (apiName ?? String(object.function_type_id))
-      : null;
-  return t(`functionType.${code}`, { defaultValue: apiName ?? code });
-}
-
-interface DetailRowProps {
-  label: string;
-  value: string | null | undefined;
-  className?: string;
-  empty?: boolean;
-}
-
-function DetailRow({ label, value, className, empty }: DetailRowProps) {
-  const display = value != null && String(value).trim() !== "" ? value : EMPTY;
-  const isEmpty = empty ?? display === EMPTY;
-  return (
-    <div
-      className={cn(
-        "flex flex-col gap-0.5 py-2",
-        isEmpty && "opacity-70",
-        className
-      )}
-    >
-      <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-        {label}
-      </span>
-      <span className="text-sm font-medium text-foreground">{display}</span>
-    </div>
-  );
-}
+import {
+  formatNum,
+  formatBool,
+  formatDate,
+  getObjectTypeLabel,
+  getFunctionTypeLabel,
+} from "@/lib/objectDetailsFormatters";
+import { DetailRow } from "@/components/ui/DetailRow";
+import { EMPTY_DISPLAY, OBJECT_DETAILS_PANEL_WIDTH_PX } from "@/constants";
 
 interface ObjectDetailsPanelProps {
   object: PlanObject;
@@ -118,12 +39,12 @@ export function ObjectDetailsPanel({
   return (
     <aside
       className="flex shrink-0 flex-col overflow-hidden border-l border-border/60 bg-card shadow-lg"
-      style={{ width: PANEL_WIDTH_PX }}
+      style={{ width: OBJECT_DETAILS_PANEL_WIDTH_PX }}
     >
       <div className="flex shrink-0 flex-col border-b border-border/60 bg-muted/40 px-5 py-4">
         <div className="flex items-center justify-between gap-3">
           <div className="flex min-w-0 flex-wrap gap-2">
-            {objectTypeLabel !== EMPTY && (
+            {objectTypeLabel !== EMPTY_DISPLAY && (
               <span className="rounded-full bg-muted px-3 py-1 text-xs font-semibold text-muted-foreground">
                 {objectTypeLabel}
               </span>
@@ -160,14 +81,14 @@ export function ObjectDetailsPanel({
           <div className="grid grid-cols-2 gap-x-6 gap-y-0">
             <DetailRow
               label={t("objectDetails.area")}
-              value={area > 0 ? `${formatNum(area)} m²` : EMPTY}
+              value={area > 0 ? `${formatNum(area)} m²` : EMPTY_DISPLAY}
             />
             <DetailRow
               label={t("objectDetails.environmentalRiskScore")}
               value={
                 object.environmental_risk_score != null
                   ? formatNum(object.environmental_risk_score)
-                  : EMPTY
+                  : EMPTY_DISPLAY
               }
             />
             <DetailRow
@@ -201,7 +122,11 @@ export function ObjectDetailsPanel({
             />
             <DetailRow
               label={t("objectDetails.objectType")}
-              value={objectTypeLabel !== EMPTY ? objectTypeLabel : EMPTY}
+              value={
+                objectTypeLabel !== EMPTY_DISPLAY
+                  ? objectTypeLabel
+                  : EMPTY_DISPLAY
+              }
             />
             <DetailRow
               label={t("objectDetails.functionType")}
@@ -269,7 +194,7 @@ export function ObjectDetailsPanel({
               value={
                 object.distance_public_transport_m != null
                   ? `${formatNum(object.distance_public_transport_m)} m`
-                  : EMPTY
+                  : EMPTY_DISPLAY
               }
             />
             <DetailRow
@@ -277,7 +202,7 @@ export function ObjectDetailsPanel({
               value={
                 object.distance_primary_road_m != null
                   ? `${formatNum(object.distance_primary_road_m)} m`
-                  : EMPTY
+                  : EMPTY_DISPLAY
               }
             />
             <DetailRow
@@ -309,7 +234,7 @@ export function ObjectDetailsPanel({
               value={
                 object.environmental_risk_score != null
                   ? formatNum(object.environmental_risk_score)
-                  : EMPTY
+                  : EMPTY_DISPLAY
               }
             />
           </div>
@@ -329,7 +254,7 @@ export function ObjectDetailsPanel({
               value={
                 object.available_power_capacity_kw != null
                   ? `${formatNum(object.available_power_capacity_kw)} kW`
-                  : EMPTY
+                  : EMPTY_DISPLAY
               }
             />
             <DetailRow

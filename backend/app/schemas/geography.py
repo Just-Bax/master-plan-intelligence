@@ -4,7 +4,7 @@ from typing import Annotated, Any
 
 from pydantic import BeforeValidator
 
-_ALLOWED_TYPES = frozenset(
+ALLOWED_GEOJSON_GEOMETRY_TYPES = frozenset(
     {
         "Point",
         "LineString",
@@ -17,25 +17,29 @@ _ALLOWED_TYPES = frozenset(
 )
 
 
-def _validate_geojson_geometry(v: Any) -> dict[str, Any]:
-    if v is None:
-        return v
-    if not isinstance(v, dict):
+def _validate_geojson_geometry(value: Any) -> dict[str, Any]:
+    if value is None:
+        return value
+    if not isinstance(value, dict):
         raise ValueError("Geometry must be a JSON object")
-    if "type" not in v:
+    if "type" not in value:
         raise ValueError("Geometry must have 'type'")
-    if v["type"] not in _ALLOWED_TYPES:
+    if value["type"] not in ALLOWED_GEOJSON_GEOMETRY_TYPES:
         raise ValueError(
-            f"Geometry type must be one of: {', '.join(sorted(_ALLOWED_TYPES))}"
+            f"Geometry type must be one of: {', '.join(sorted(ALLOWED_GEOJSON_GEOMETRY_TYPES))}"
         )
-    _array = (list, tuple)  # Shapely __geo_interface__ uses tuples
-    if v["type"] == "GeometryCollection":
-        if "geometries" not in v or not isinstance(v["geometries"], _array):
+    array_types = (list, tuple)  # Shapely __geo_interface__ uses tuples
+    if value["type"] == "GeometryCollection":
+        if "geometries" not in value or not isinstance(
+            value["geometries"], array_types
+        ):
             raise ValueError("GeometryCollection must have 'geometries' array")
     else:
-        if "coordinates" not in v or not isinstance(v["coordinates"], _array):
+        if "coordinates" not in value or not isinstance(
+            value["coordinates"], array_types
+        ):
             raise ValueError("Geometry must have 'coordinates' array")
-    return v
+    return value
 
 
 GeoJSONGeometry = Annotated[dict[str, Any], BeforeValidator(_validate_geojson_geometry)]

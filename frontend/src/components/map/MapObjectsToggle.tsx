@@ -1,5 +1,5 @@
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { cn, mapToolbarClassName } from "@/lib/utils";
 import { useMapData } from "@/contexts/MapDataContext";
 

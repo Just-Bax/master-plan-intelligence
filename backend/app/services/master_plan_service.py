@@ -6,8 +6,9 @@ from sqlalchemy import cast, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from app.constants import ERROR_MESSAGE_MASTER_PLAN_NOT_FOUND
 from app.core.exceptions import NotFoundError
-from app.core.geo import geojson_to_wkb, geom_to_geojson
+from app.core.geography import geojson_to_wkb, geom_to_geojson
 from app.models.master_plan import MasterPlan
 from app.models.object import Object
 from app.models.user import User
@@ -73,7 +74,7 @@ async def get_by_id(
     )
     row = result.one_or_none()
     if row is None:
-        raise NotFoundError("Master plan not found")
+        raise NotFoundError(ERROR_MESSAGE_MASTER_PLAN_NOT_FOUND)
     return (row[0], row[1])
 
 

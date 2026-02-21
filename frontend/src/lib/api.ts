@@ -35,10 +35,10 @@ export async function apiGet<T>(path: string): Promise<T> {
   return apiFetch<T>(path, { method: "GET" });
 }
 
-export async function apiPost<T>(path: string, body: unknown): Promise<T> {
+export async function apiPost<T>(path: string, body?: unknown): Promise<T> {
   return apiFetch<T>(path, {
     method: "POST",
-    body: JSON.stringify(body),
+    ...(body !== undefined && { body: JSON.stringify(body) }),
   });
 }
 

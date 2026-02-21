@@ -1,5 +1,26 @@
 """Domain exceptions for the service layer. Routes map these to HTTPException."""
 
+import functools
+from collections.abc import Awaitable, Callable
+from typing import Any, TypeVar
+
+R = TypeVar("R")
+
+
+def handle_domain_errors(
+    func: Callable[..., Awaitable[R]],
+) -> Callable[..., Awaitable[R]]:
+    """Decorator that catches NotFoundError, ForbiddenError, ConflictError and maps to HTTPException."""
+
+    @functools.wraps(func)
+    async def wrapper(*args: Any, **kwargs: Any) -> R:
+        try:
+            return await func(*args, **kwargs)
+        except (NotFoundError, ForbiddenError, ConflictError) as e:
+            domain_exception_to_http(e)
+
+    return wrapper  # type: ignore[return-value]
+
 
 class NotFoundError(Exception):
     """Resource not found (e.g. 404)."""

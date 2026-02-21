@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import {
   DEFAULT_LOCALE,
   LOCALE_LABELS,

@@ -6,8 +6,13 @@ from sqlalchemy import cast, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.core.geo import geojson_to_wkb, geom_to_geojson
+from app.constants import ERROR_MESSAGE_OBJECT_NOT_FOUND
 from app.core.exceptions import NotFoundError
+from app.core.geography import (
+    geojson_to_wkb,
+    geom_to_geojson,
+    require_point_geojson,
+)
 from app.models.object import Object
 from app.models.user import User
 from app.schemas.object import ObjectCreate, ObjectResponse, ObjectUpdate
@@ -19,20 +24,6 @@ DEFAULT_GEOMETRY: dict[str, Any] = {
     "type": "Point",
     "coordinates": [69.279, 41.308],
 }
-
-
-def _require_point_geometry(geom: dict[str, Any]) -> None:
-    """Raise ValueError if geometry is not a GeoJSON Point with at least [lng, lat]."""
-    if not isinstance(geom.get("type"), str) or geom.get("type") != "Point":
-        raise ValueError("Object geometry must be type 'Point'")
-    coords = geom.get("coordinates")
-    if not isinstance(coords, (list, tuple)) or len(coords) < 2:
-        raise ValueError("Point geometry must have coordinates [lng, lat]")
-    try:
-        float(coords[0])
-        float(coords[1])
-    except (TypeError, ValueError):
-        raise ValueError("Point coordinates must be numbers")
 
 
 def object_to_response(obj: Object, area_m2: float | None = None) -> ObjectResponse:
@@ -107,37 +98,14 @@ async def get_by_id(db: AsyncSession, object_id: int) -> tuple[Object, float | N
     )
     row = result.one_or_none()
     if row is None:
-        raise NotFoundError("Object not found")
+        raise NotFoundError(ERROR_MESSAGE_OBJECT_NOT_FOUND)
     return (row[0], row[1])
 
 
 def _apply_object_create(obj: Object, body: ObjectCreate) -> None:
-    obj.object_type_id = body.object_type_id
-    obj.function_type_id = body.function_type_id
-    obj.parent_id = body.parent_id
-    obj.object_id = body.object_id
-    obj.parcel_id = body.parcel_id
-    obj.name = body.name
-    obj.administrative_region = body.administrative_region
-    obj.district = body.district
-    obj.mahalla = body.mahalla
-    obj.address_full = body.address_full
-    obj.capacity_people_max = body.capacity_people_max
-    obj.student_capacity = body.student_capacity
-    obj.bed_count = body.bed_count
-    obj.unit_count = body.unit_count
-    obj.distance_public_transport_m = body.distance_public_transport_m
-    obj.distance_primary_road_m = body.distance_primary_road_m
-    obj.parking_spaces_total = body.parking_spaces_total
-    obj.protected_zone = body.protected_zone
-    obj.heritage_zone = body.heritage_zone
-    obj.flood_zone = body.flood_zone
-    obj.environmental_risk_score = body.environmental_risk_score
-    obj.power_connected = body.power_connected
-    obj.available_power_capacity_kw = body.available_power_capacity_kw
-    obj.water_connected = body.water_connected
-    obj.sewer_connected = body.sewer_connected
-    obj.data_source_reference = body.data_source_reference
+    data = body.model_dump(exclude={"geometry"})
+    for key, value in data.items():
+        setattr(obj, key, value)
 
 
 async def create_object(
@@ -146,7 +114,7 @@ async def create_object(
     current_user: User,
 ) -> tuple[Object, float | None]:
     geometry = body.geometry if body.geometry is not None else DEFAULT_GEOMETRY
-    _require_point_geometry(geometry)
+    require_point_geojson(geometry)
     obj = Object(
         geometry=geojson_to_wkb(geometry),
         created_by=current_user.id,
@@ -168,60 +136,11 @@ async def create_object(
 
 
 def _apply_object_update(obj: Object, body: ObjectUpdate) -> None:
-    if body.object_type_id is not None:
-        obj.object_type_id = body.object_type_id
-    if body.function_type_id is not None:
-        obj.function_type_id = body.function_type_id
-    if body.parent_id is not None:
-        obj.parent_id = body.parent_id
-    if body.object_id is not None:
-        obj.object_id = body.object_id
-    if body.parcel_id is not None:
-        obj.parcel_id = body.parcel_id
-    if body.name is not None:
-        obj.name = body.name
-    if body.administrative_region is not None:
-        obj.administrative_region = body.administrative_region
-    if body.district is not None:
-        obj.district = body.district
-    if body.mahalla is not None:
-        obj.mahalla = body.mahalla
-    if body.address_full is not None:
-        obj.address_full = body.address_full
-    if body.capacity_people_max is not None:
-        obj.capacity_people_max = body.capacity_people_max
-    if body.student_capacity is not None:
-        obj.student_capacity = body.student_capacity
-    if body.bed_count is not None:
-        obj.bed_count = body.bed_count
-    if body.unit_count is not None:
-        obj.unit_count = body.unit_count
-    if body.distance_public_transport_m is not None:
-        obj.distance_public_transport_m = body.distance_public_transport_m
-    if body.distance_primary_road_m is not None:
-        obj.distance_primary_road_m = body.distance_primary_road_m
-    if body.parking_spaces_total is not None:
-        obj.parking_spaces_total = body.parking_spaces_total
-    if body.protected_zone is not None:
-        obj.protected_zone = body.protected_zone
-    if body.heritage_zone is not None:
-        obj.heritage_zone = body.heritage_zone
-    if body.flood_zone is not None:
-        obj.flood_zone = body.flood_zone
-    if body.environmental_risk_score is not None:
-        obj.environmental_risk_score = body.environmental_risk_score
-    if body.power_connected is not None:
-        obj.power_connected = body.power_connected
-    if body.available_power_capacity_kw is not None:
-        obj.available_power_capacity_kw = body.available_power_capacity_kw
-    if body.water_connected is not None:
-        obj.water_connected = body.water_connected
-    if body.sewer_connected is not None:
-        obj.sewer_connected = body.sewer_connected
-    if body.data_source_reference is not None:
-        obj.data_source_reference = body.data_source_reference
+    data = body.model_dump(exclude_unset=True, exclude={"geometry"})
+    for key, value in data.items():
+        setattr(obj, key, value)
     if body.geometry is not None:
-        _require_point_geometry(body.geometry)
+        require_point_geojson(body.geometry)
         obj.geometry = geojson_to_wkb(body.geometry)
 
 
@@ -256,5 +175,5 @@ async def delete_object(
     result = await db.execute(select(Object).where(Object.id == object_id))
     obj = result.scalar_one_or_none()
     if obj is None:
-        raise NotFoundError("Object not found")
+        raise NotFoundError(ERROR_MESSAGE_OBJECT_NOT_FOUND)
     await db.delete(obj)

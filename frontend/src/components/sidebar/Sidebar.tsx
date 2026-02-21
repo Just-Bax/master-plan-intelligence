@@ -4,7 +4,7 @@ import {
   DocumentChartBarIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { API_PATHS, SIDEBAR_WIDTH_PX } from "@/constants";
 import { apiPost } from "@/lib/api";
 import { MasterPlanSelect } from "@/components/sidebar/MasterPlanSelect";
@@ -107,8 +107,7 @@ export function Sidebar() {
             setReportLoading(true);
             try {
               await apiPost<{ report: Record<string, unknown> }>(
-                API_PATHS.AI_REPORT,
-                { master_plan_id: activeMasterPlan.id }
+                API_PATHS.AI_REPORT(activeMasterPlan.id)
               );
               await refetchMasterPlans();
             } catch (e) {

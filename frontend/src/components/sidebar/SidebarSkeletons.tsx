@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 /** Loading placeholder for the master plan label + select block in the sidebar. */
 export function SidebarPlansSkeleton() {

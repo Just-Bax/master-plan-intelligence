@@ -4,6 +4,7 @@ from pathlib import Path
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.constants import ERROR_MESSAGE_FILE_NOT_FOUND
 from app.core.config import settings
 from app.core.exceptions import NotFoundError
 from app.models.file import File as FileModel
@@ -53,7 +54,7 @@ async def get_file(
     result = await db.execute(select(FileModel).where(FileModel.file_id == file_id))
     record = result.scalar_one_or_none()
     if record is None:
-        raise NotFoundError("File not found")
+        raise NotFoundError(ERROR_MESSAGE_FILE_NOT_FOUND)
     return record
 
 
@@ -64,6 +65,6 @@ async def get_file_content(
     record = await get_file(db, file_id)
     path = _file_path(file_id)
     if not path.is_file():
-        raise NotFoundError("File not found")
+        raise NotFoundError(ERROR_MESSAGE_FILE_NOT_FOUND)
     content = path.read_bytes()
     return record, content

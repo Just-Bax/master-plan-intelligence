@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { useTranslation } from "react-i18next";
 import { useAiChat } from "@/hooks/useAiChat";
 import type { MasterPlan, PlanObject, Project } from "@/types/api";

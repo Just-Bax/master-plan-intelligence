@@ -20,10 +20,6 @@ class ChatResponse(BaseModel):
     message: str
 
 
-class ReportRequest(BaseModel):
-    master_plan_id: int
-
-
 class ReportResponse(BaseModel):
     """Development report JSON (same schema as stored in master_plan.ai_development_report)."""
 

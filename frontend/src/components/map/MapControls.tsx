@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMap, useMapEvents } from "react-leaflet";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { cn, mapToolbarClassName } from "@/lib/utils";
 import { MAP_DEFAULT_CENTER, MAP_DEFAULT_ZOOM } from "@/constants";
 

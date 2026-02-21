@@ -1,6 +1,6 @@
 import L from "leaflet";
 import { MAP_EDIT_ICON_SIZE_VERTEX } from "@/constants/map";
-import { getRing, setRing } from "@/components/map/MapLayerUtils";
+import { getRing, setRing } from "@/components/map/mapLayerUtils";
 
 function createVertexIcon(): L.DivIcon {
   const [size] = MAP_EDIT_ICON_SIZE_VERTEX;

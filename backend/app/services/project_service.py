@@ -1,6 +1,7 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.constants import ERROR_MESSAGE_PROJECT_NOT_FOUND
 from app.core.exceptions import NotFoundError
 from app.models.project import Project
 from app.models.user import User
@@ -31,7 +32,7 @@ async def get_by_id(
     result = await db.execute(select(Project).where(Project.id == project_id))
     project = result.scalar_one_or_none()
     if project is None:
-        raise NotFoundError("Project not found")
+        raise NotFoundError(ERROR_MESSAGE_PROJECT_NOT_FOUND)
     return project
 
 

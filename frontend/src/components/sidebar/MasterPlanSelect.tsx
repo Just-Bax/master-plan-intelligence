@@ -4,16 +4,16 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { Button } from "@/components/ui/button";
-import { ConfirmDialog } from "@/components/ui/confirm-dialog";
+import { Button } from "@/components/ui/Button";
+import { ConfirmDialog } from "@/components/ui/ConfirmDialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Skeleton } from "@/components/ui/skeleton";
+} from "@/components/ui/Select";
+import { Skeleton } from "@/components/ui/Skeleton";
 import { useTranslation } from "react-i18next";
 import { MasterPlanFormDialog } from "@/components/sidebar/MasterPlanFormDialog";
 import type { MasterPlan } from "@/types/api";

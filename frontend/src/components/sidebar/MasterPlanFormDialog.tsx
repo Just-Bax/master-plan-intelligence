@@ -1,19 +1,11 @@
 import { useState, useEffect } from "react";
-import {
-  Dialog,
-  DialogHeader,
-  DialogTitle,
-  DialogContent,
-  DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { useTranslation } from "react-i18next";
 import type {
   GeoJSONGeometry,
   MasterPlan,
   MasterPlanFormData,
 } from "@/types/api";
+import { EntityFormDialog } from "@/components/ui/EntityFormDialog";
 import { inputClassName } from "@/lib/utils";
 
 interface MasterPlanFormDialogProps {
@@ -76,75 +68,57 @@ export function MasterPlanFormDialog({
     }
   }
 
+  const deleteConfig =
+    isEdit && onDelete
+      ? {
+          open: deleteConfirmOpen,
+          onOpenChange: setDeleteConfirmOpen,
+          onConfirm: handleDelete,
+          deleting: deleting,
+          buttonLabel: t("masterPlanForm.delete"),
+          confirmTitle: t("confirm.deleteMasterPlan.title"),
+          confirmDescription: t("confirm.deleteMasterPlan.description"),
+          confirmLabel: t("confirm.deleteMasterPlan.confirmLabel"),
+          cancelLabel: t("confirm.deleteMasterPlan.cancelLabel"),
+        }
+      : undefined;
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <form onSubmit={handleSubmit}>
-        <DialogHeader>
-          <DialogTitle>
-            {isEdit
-              ? t("masterPlanForm.titleEdit")
-              : t("masterPlanForm.titleNew")}
-          </DialogTitle>
-        </DialogHeader>
-        <DialogContent className="space-y-3">
-          {!isEdit && initialGeometry && (
-            <p className="text-sm text-muted-foreground">
-              {t("masterPlanForm.areaDefinedOnMap")}
-            </p>
-          )}
-          <div>
-            <label className="mb-1 block text-sm font-medium text-foreground">
-              {t("masterPlanForm.nameLabel")}
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className={inputClassName}
-              required
-            />
-          </div>
-        </DialogContent>
-        <DialogFooter>
-          {isEdit && onDelete && (
-            <>
-              <Button
-                type="button"
-                variant="destructive"
-                onClick={() => setDeleteConfirmOpen(true)}
-                disabled={deleting}
-              >
-                {t("masterPlanForm.delete")}
-              </Button>
-              <ConfirmDialog
-                open={deleteConfirmOpen}
-                onOpenChange={setDeleteConfirmOpen}
-                title={t("confirm.deleteMasterPlan.title")}
-                description={t("confirm.deleteMasterPlan.description")}
-                confirmLabel={t("confirm.deleteMasterPlan.confirmLabel")}
-                cancelLabel={t("confirm.deleteMasterPlan.cancelLabel")}
-                variant="destructive"
-                onConfirm={handleDelete}
-              />
-            </>
-          )}
-          <div className="flex-1" />
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => onOpenChange(false)}
-          >
-            {t("masterPlanForm.cancel")}
-          </Button>
-          <Button type="submit" disabled={saving}>
-            {saving
-              ? t("masterPlanForm.saving")
-              : isEdit
-                ? t("masterPlanForm.save")
-                : t("masterPlanForm.create")}
-          </Button>
-        </DialogFooter>
-      </form>
-    </Dialog>
+    <EntityFormDialog
+      open={open}
+      onOpenChange={onOpenChange}
+      title={
+        isEdit ? t("masterPlanForm.titleEdit") : t("masterPlanForm.titleNew")
+      }
+      onSubmit={handleSubmit}
+      saving={saving}
+      cancelLabel={t("masterPlanForm.cancel")}
+      submitLabel={
+        saving
+          ? t("masterPlanForm.saving")
+          : isEdit
+            ? t("masterPlanForm.save")
+            : t("masterPlanForm.create")
+      }
+      deleteConfig={deleteConfig}
+    >
+      {!isEdit && initialGeometry && (
+        <p className="text-sm text-muted-foreground">
+          {t("masterPlanForm.areaDefinedOnMap")}
+        </p>
+      )}
+      <div>
+        <label className="mb-1 block text-sm font-medium text-foreground">
+          {t("masterPlanForm.nameLabel")}
+        </label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className={inputClassName}
+          required
+        />
+      </div>
+    </EntityFormDialog>
   );
 }

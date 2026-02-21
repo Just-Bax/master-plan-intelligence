@@ -45,7 +45,7 @@ REST endpoints (all under API base URL, JSON unless noted):
 
   AI (tag: ai)
     POST /ai/chat
-    POST /ai/report
+    POST /ai/report/{master_plan_id}
 
   Files (tag: file). GET requires auth.
     POST /file
@@ -70,9 +70,8 @@ from app.core.config import settings
 
 
 def _cors_origins() -> list[str]:
+    """Derive CORS origins list from config (single source: CORS_ORIGINS_STR)."""
     s = (settings.CORS_ORIGINS_STR or "").strip()
-    if not s:
-        return ["http://localhost:5173", "http://127.0.0.1:5173"]
     return [x.strip() for x in s.split(",") if x.strip()]
 
 

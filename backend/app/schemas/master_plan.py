@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from app.schemas.geo import GeoJSONGeometry
+from app.schemas.geography import GeoJSONGeometry
 
 
 class MasterPlanBase(BaseModel):

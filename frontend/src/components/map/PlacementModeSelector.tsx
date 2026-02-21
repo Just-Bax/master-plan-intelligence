@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { useMapData } from "@/contexts/MapDataContext";
 import { MAP_PLACEMENT_DEFAULT_RADIUS_M } from "@/constants/map";
 import { cn, mapToolbarClassName } from "@/lib/utils";
